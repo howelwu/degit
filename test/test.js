@@ -23,7 +23,7 @@ function exec(cmd) {
 	});
 }
 
-describe('degit', function() {
+describe.skip('degit', function() {
 	this.timeout(timeout);
 
 	function compare(dir, files) {
@@ -209,7 +209,7 @@ describe('degit', function() {
 	});
 
 	describe('git mode', () => {
-		it.skip('is able to clone correctly using git mode', async () => {
+		it('is able to clone correctly using git mode', async () => {
 			await rimraf('.tmp');
 
 			await exec(

@@ -1,8 +1,8 @@
-# _pdegit_
+# _p_degit_
 
 Usage:
 
-`pdegit <src>[#ref] [<dest>] [options]`
+`p_degit <src>[#ref] [<dest>] [options]`
 
 Fetches the `src` repo, and extracts it to `dest` (or the current directory).
 
@@ -53,7 +53,7 @@ Options:
   `--cache`,   `-c`  Only use local cache
   `--force`,   `-f`  Allow non-empty destination directory
   `--verbose`, `-v`  Extra logging
-  `--mode=`,   `-m=` Force the mode by which pdegit clones the repo
+  `--mode=`,   `-m=` Force the mode by which p_degit clones the repo
                      Valid options are `tar` or `git` (uses SSH)
 
-See https://github.com/howelwu/pdegit for more information
+See https://github.com/howelwu/degit for more information
