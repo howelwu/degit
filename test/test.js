@@ -6,6 +6,7 @@ const glob = require('tiny-glob/sync');
 const rimraf = require('rimraf').sync;
 const assert = require('assert');
 const child_process = require('child_process');
+const { mkdirp } = require('mkdirp');
 
 const degit = require('../dist/index.js');
 const degitPath = path.resolve('dist/bin.js');
@@ -15,6 +16,7 @@ const timeout = 30000;
 function exec(cmd) {
 	return new Promise((fulfil, reject) => {
 		child_process.exec(cmd, (err, stdout, stderr) => {
+			console.log(err, stderr, stdout, '909090')
 			if (err) return reject(err);
 			console.log(stdout);
 			console.error(stderr);
@@ -23,7 +25,7 @@ function exec(cmd) {
 	});
 }
 
-describe.skip('degit', function() {
+describe('degit', function() {
 	this.timeout(timeout);
 
 	function compare(dir, files) {
@@ -53,13 +55,13 @@ describe.skip('degit', function() {
 				compare(`.tmp/test-repo`, {
 					'file.txt': 'hello from github!',
 					subdir: null,
-					'subdir/file.txt': 'hello from a subdirectory!'
+					[path.join('subdir', 'file.txt')]: 'hello from a subdirectory!'
 				});
 			});
 		});
 	});
 
-	describe('gitlab', () => {
+	describe.skip('gitlab', () => {
 		[
 			'gitlab:Rich-Harris/degit-test-repo',
 			'git@gitlab.com:Rich-Harris/degit-test-repo',
@@ -89,7 +91,7 @@ describe.skip('degit', function() {
 		});
 	});
 
-	describe('Sourcehut', () => {
+	describe.skip('Sourcehut', () => {
 		[
 			'git.sr.ht/~satotake/degit-test-repo',
 			'https://git.sr.ht/~satotake/degit-test-repo',
@@ -125,13 +127,16 @@ describe.skip('degit', function() {
 			let succeeded;
 
 			try {
-				await exec(`mkdir -p .tmp/test-repo`);
+				mkdirp.sync(`${path.join('.tmp', 'test-repo')}`)
 				await exec(`echo "not empty" > .tmp/test-repo/file.txt`);
+
+				console.log('begin 131')
 				await exec(
 					`node ${degitPath} Rich-Harris/degit-test-repo .tmp/test-repo -v`
 				);
 				succeeded = true;
 			} catch (err) {
+				console.log('loggg:', JSON.stringify(err.message))
 				assert.ok(/destination directory is not empty/.test(err.message));
 			}
 
@@ -153,7 +158,7 @@ describe.skip('degit', function() {
 			compare(`.tmp/test-repo`, {
 				'file.txt': 'hello from github!',
 				subdir: null,
-				'subdir/file.txt': 'hello from a subdirectory!'
+				[path.join('subdir', 'file.txt')]: 'hello from a subdirectory!'
 			});
 		});
 	});
@@ -167,7 +172,7 @@ describe.skip('degit', function() {
 			compare(`.tmp/test-repo`, {
 				'file.txt': 'hello from github!',
 				subdir: null,
-				'subdir/file.txt': 'hello from a subdirectory!'
+				[path.join('subdir', 'file.txt')]: 'hello from a subdirectory!'
 			});
 		});
 	});
@@ -187,7 +192,7 @@ describe.skip('degit', function() {
 			compare(`.tmp/test-repo`, {
 				'other.txt': 'hello from github!',
 				subdir: null,
-				'subdir/file.txt': 'hello from a subdirectory!'
+				[path.join('subdir', 'file.txt')]: 'hello from a subdirectory!'
 			});
 		});
 
@@ -201,14 +206,14 @@ describe.skip('degit', function() {
 				dir: null,
 				folder: null,
 				subdir: null,
-				'folder/file.txt': 'hello from clobber file!',
-				'folder/other.txt': 'hello from other file!',
-				'subdir/file.txt': 'hello from a subdirectory!'
+				[path.join('folder', 'file.txt')]: 'hello from clobber file!',
+				[path.join('folder', 'other.txt')]: 'hello from other file!',
+				[path.join('subdir', 'file.txt')]: 'hello from a subdirectory!'
 			});
 		});
 	});
 
-	describe('git mode', () => {
+	describe.skip('git mode', () => {
 		it('is able to clone correctly using git mode', async () => {
 			await rimraf('.tmp');
 
