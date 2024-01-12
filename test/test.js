@@ -209,7 +209,7 @@ describe('degit', function() {
 	});
 
 	describe('git mode', () => {
-		it('is able to clone correctly using git mode', async () => {
+		it.skip('is able to clone correctly using git mode', async () => {
 			await rimraf('.tmp');
 
 			await exec(

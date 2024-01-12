@@ -1,8 +1,8 @@
-# _degit_
+# _pdegit_
 
 Usage:
 
-`degit <src>[#ref] [<dest>] [options]`
+`pdegit <src>[#ref] [<dest>] [options]`
 
 Fetches the `src` repo, and extracts it to `dest` (or the current directory).
 
@@ -53,7 +53,7 @@ Options:
   `--cache`,   `-c`  Only use local cache
   `--force`,   `-f`  Allow non-empty destination directory
   `--verbose`, `-v`  Extra logging
-  `--mode=`,   `-m=` Force the mode by which degit clones the repo
+  `--mode=`,   `-m=` Force the mode by which pdegit clones the repo
                      Valid options are `tar` or `git` (uses SSH)
 
-See https://github.com/Rich-Harris/degit for more information
+See https://github.com/howelwu/pdegit for more information

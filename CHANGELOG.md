@@ -1,4 +1,11 @@
-# degit changelog
+# pdegit changelog
+> fork from [Rich-Harris](https://github.com/Rich-Harris/degit), thank you Harris!
+
+## 2.8.5
+
+* Forked [pdegit](https://github.com/howelwu/degit)
+* show more information when clone has error ([#1](https://github.com/howelwu/degit/pull/1))
+* fix `_cloneWithGit` in windows ([#2](https://github.com/howelwu/degit/pull/2))
 
 ## 2.8.4
 
