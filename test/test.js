@@ -16,7 +16,6 @@ const timeout = 30000;
 function exec(cmd) {
 	return new Promise((fulfil, reject) => {
 		child_process.exec(cmd, (err, stdout, stderr) => {
-			console.log(err, stderr, stdout, '909090')
 			if (err) return reject(err);
 			console.log(stdout);
 			console.error(stderr);
