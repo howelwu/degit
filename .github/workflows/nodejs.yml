@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
@@ -13,13 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    # - name: Use Node.js ${{ matrix.node-version }}
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: pnpm install
-    - run: pnpm run build
-    - run: pnpm test
-    - run: pnpm run lint
+    - run: npm install
+    - run: npm run build
+    - run: npm test
+    - run: npm run lint
       env:
         CI: true
